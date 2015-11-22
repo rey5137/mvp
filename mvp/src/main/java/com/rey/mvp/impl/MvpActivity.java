@@ -2,17 +2,10 @@ package com.rey.mvp.impl;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.rey.mvp.BuildConfig;
 import com.rey.mvp.CacheFactory;
-import com.rey.mvp.Presenter;
 import com.rey.mvp.PresenterCache;
 import com.rey.mvp.ViewStateCache;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * An Activity that implement CacheFactory

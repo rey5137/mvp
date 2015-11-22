@@ -4,21 +4,15 @@ import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.SimpleArrayMap;
 import android.support.v4.util.SparseArrayCompat;
-import android.util.Log;
-import android.util.SparseLongArray;
 
-import com.rey.mvp.BuildConfig;
 import com.rey.mvp.Presenter;
 import com.rey.mvp.PresenterCache;
 import com.rey.mvp.ViewState;
 import com.rey.mvp.ViewStateCache;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Rey on 11/20/2015.
