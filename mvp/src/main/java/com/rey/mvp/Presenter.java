@@ -13,23 +13,10 @@ public interface Presenter<V, S extends ViewState> {
     void onCreate(S viewState);
 
     /**
-     * Called when the presenter is destroyed.
-     * Note that because presenters survive configuration changes,
-     * onDestroy will not get called every time your associated view(fragment) is destroyed.
-     * This method is intended for cleanup, for example, cancelling a useless request.
-     */
-    void onDestroy();
-
-    /**
      * Attach your view to this presenter.
      * @param view The view will associated with this presenter.
      */
     void onAttachView(V view);
-
-    /**
-     * Detach your view from this presenter.
-     */
-    void onDetachView();
 
     /**
      * Called when the view go visible (Fragment onResume()).
@@ -40,4 +27,17 @@ public interface Presenter<V, S extends ViewState> {
      * Called when the view go hiding (Fragment onPause()).
      */
     void onViewHide();
+
+    /**
+     * Detach your view from this presenter.
+     */
+    void onDetachView();
+
+    /**
+     * Called when the presenter is destroyed.
+     * Note that because presenters survive configuration changes,
+     * onDestroy will not get called every time your associated view(fragment) is destroyed.
+     * This method is intended for cleanup, for example, cancelling a useless request.
+     */
+    void onDestroy();
 }

@@ -37,7 +37,7 @@ public abstract class MvpFragment<V, P extends Presenter<V, S>, S extends ViewSt
 
         @Override
         public String getViewStateTag() {
-            return getViewStateTag();
+            return MvpFragment.this.getViewStateTag();
         }
 
     };
