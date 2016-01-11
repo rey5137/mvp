@@ -68,7 +68,7 @@ public class MvpDelegate<V, P extends Presenter<V, S>, S extends ViewState> {
 
     public void onSaveInstanceState(Bundle outState) {
         mIsDestroyedBySystem = true;
-        outState.putLong(KEY_PRESENTER_ID, mPresenterId);
+        outState.putInt(KEY_PRESENTER_ID, mPresenterId);
         ViewStateCache cache = mViewStateCacheRef.get();
         if(cache != null)
             cache.saveViewStateData(mViewState);

@@ -46,7 +46,7 @@ public class MvpActivityDelegate implements PresenterCache, ViewStateCache {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-        outState.putLong(KEY_NEXT_PRESENTER_ID, mPersistentInstance.mNextPresenterId.get());
+        outState.putInt(KEY_NEXT_PRESENTER_ID, mPersistentInstance.mNextPresenterId.get());
 
         Set<String> set = mPersistentInstance.mViewStatesData.keySet();
         String[] tags = new String[set.size()];
