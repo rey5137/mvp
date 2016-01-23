@@ -1,6 +1,7 @@
 package com.rey.mvp.impl;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,12 +19,13 @@ import com.rey.mvp.ViewStateFactory;
  */
 public abstract class MvpFragment<V, P extends Presenter<V, S>, S extends ViewState> extends Fragment {
 
-    private MvpDelegate<V, P, S> mMvpDelegate = new MvpDelegate<>();
+    protected Context mContext;
+    protected MvpDelegate<V, P, S> mMvpDelegate = new MvpDelegate<>();
 
-    private PresenterFactory<P> mPresenterFactory = new PresenterFactory<P>() {
+    protected PresenterFactory<P> mPresenterFactory = new PresenterFactory<P>() {
         @NonNull
         @Override public P createPresenter() {
-            return onCreatePresenter();
+            return onCreatePresenter(mContext);
         }
     };
 
@@ -32,7 +34,7 @@ public abstract class MvpFragment<V, P extends Presenter<V, S>, S extends ViewSt
         @NonNull
         @Override
         public S createViewState() {
-            return onCreateViewState();
+            return onCreateViewState(mContext);
         }
 
         @Override
@@ -54,6 +56,12 @@ public abstract class MvpFragment<V, P extends Presenter<V, S>, S extends ViewSt
         else
             throw new RuntimeException(getClass() + " must be attached to " +
                     "an Activity that implements " + CacheFactory.class);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     @Override
@@ -100,17 +108,23 @@ public abstract class MvpFragment<V, P extends Presenter<V, S>, S extends ViewSt
         mMvpDelegate.onDestroy();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+    }
+
     /**
      * @return The Presenter that will attach this view.
      */
     @NonNull
-    public abstract P onCreatePresenter();
+    public abstract P onCreatePresenter(Context context);
 
     /**
      * @return The ViewState will be bound with the Presenter.
      */
     @NonNull
-    public abstract S onCreateViewState();
+    public abstract S onCreateViewState(Context context);
 
     /**
      * @return An unique tag for the ViewState.

@@ -26,6 +26,9 @@ public class MvpDelegate<V, P extends Presenter<V, S>, S extends ViewState> {
     private boolean mIsDestroyedBySystem;
 
     public void onCreate(PresenterCache presenterCache, ViewStateCache viewStateCache, Bundle savedInstanceState, PresenterFactory<P> presenterFactory, ViewStateFactory<S> viewStateFactory) {
+        if(mPresenter != null && mViewState != null)
+            return;
+
         mPresenterCacheRef = new WeakReference<>(presenterCache);
         mViewStateCacheRef = new WeakReference<>(viewStateCache);
 
