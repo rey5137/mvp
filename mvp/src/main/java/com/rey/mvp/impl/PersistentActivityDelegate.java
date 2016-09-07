@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Rey on 11/20/2015.
  */
-public class MvpActivityDelegate implements PresenterCache, ViewStateCache {
+public class PersistentActivityDelegate implements PresenterCache, ViewStateCache {
 
     private static final String KEY_NEXT_PRESENTER_ID = "com.rey.mvp.next_presenter_id";
     private static final String KEY_VIEW_STATE_TAG = "com.rey.mvp.view_state_tag";
