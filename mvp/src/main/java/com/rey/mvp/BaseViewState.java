@@ -1,6 +1,9 @@
 package com.rey.mvp;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  * Created by Rey on 11/16/2015.
  */
-public abstract class BaseViewState implements ViewState {
+public class BaseViewState implements ViewState {
 
     protected String mTag;
     protected List<WeakReference<Presenter>> mPresenters = new ArrayList<>();
@@ -47,5 +50,14 @@ public abstract class BaseViewState implements ViewState {
         }
 
         return mPresenters.isEmpty();
+    }
+
+    @Override
+    public void onRestore(@NonNull String data) {}
+
+    @Nullable
+    @Override
+    public String onSave() {
+        return null;
     }
 }
