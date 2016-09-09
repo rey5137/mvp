@@ -41,8 +41,8 @@ public abstract class MvpActivity<V, P extends Presenter<V, S>, S extends ViewSt
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        mMvpDelegate.onCreate(getPresenterCache(), getViewStateCache(), savedInstanceState, mPresenterFactory, mViewStateFactory);
         super.onCreate(savedInstanceState);
+        mMvpDelegate.onCreate(getPresenterCache(), getViewStateCache(), savedInstanceState, mPresenterFactory, mViewStateFactory);
     }
 
     @Override
