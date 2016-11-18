@@ -14,7 +14,9 @@ import java.lang.ref.WeakReference;
 public class MvpDelegate<V, P extends Presenter<V, S>, S extends ViewState> {
 
     private static final String KEY_PRESENTER_ID = "com.rey.mvp.presenter_id";
+    private static final String KEY_VIEWSTATE_TAG = "com.rey.mvp.viewstate_tag";
 
+    private String mViewStateTag;
     private int mPresenterId;
 
     private WeakReference<PresenterCache> mPresenterCacheRef;
@@ -32,11 +34,11 @@ public class MvpDelegate<V, P extends Presenter<V, S>, S extends ViewState> {
         mPresenterCacheRef = new WeakReference<>(presenterCache);
         mViewStateCacheRef = new WeakReference<>(viewStateCache);
 
-        String viewStateTag = viewStateFactory.getViewStateTag();
-        mViewState = viewStateCache.getViewState(viewStateTag);
+        mViewStateTag = (savedInstanceState == null) ? viewStateFactory.getViewStateTag() : savedInstanceState.getString(KEY_VIEWSTATE_TAG);
+        mViewState = viewStateCache.getViewState(mViewStateTag);
         if(mViewState == null) {
             mViewState = viewStateFactory.createViewState();
-            mViewState.setTag(viewStateTag);
+            mViewState.setTag(mViewStateTag);
             viewStateCache.restoreViewStateData(mViewState);
             viewStateCache.addViewState(mViewState);
         }
@@ -72,6 +74,7 @@ public class MvpDelegate<V, P extends Presenter<V, S>, S extends ViewState> {
     public void onSaveInstanceState(Bundle outState) {
         mIsDestroyedBySystem = true;
         outState.putInt(KEY_PRESENTER_ID, mPresenterId);
+        outState.putString(KEY_VIEWSTATE_TAG, mViewStateTag);
         ViewStateCache cache = mViewStateCacheRef.get();
         if(cache != null)
             cache.saveViewStateData(mViewState);
